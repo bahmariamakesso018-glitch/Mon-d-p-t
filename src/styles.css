@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+/* body {
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(to right, #00b894, #0984e3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    } */
+
+    body{
+         background: linear-gradient(to right, #00b894, #0984e3);
+         /* background-image: url("Gemini_Generated_Image_eoc5m2eoc5m2eoc5.png");  */
+    }

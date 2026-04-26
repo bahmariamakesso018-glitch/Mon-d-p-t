@@ -1,0 +1,226 @@
+<div class="main-wrapper">
+  
+  <aside class="sidebar">
+    <div class="brand">
+     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-pulse-fill" viewBox="0 0 16 16">
+  <path d="M1.475 9C2.702 10.84 4.779 12.871 8 15c3.221-2.129 5.298-4.16 6.525-6H12a.5.5 0 0 1-.464-.314l-1.457-3.642-1.598 5.593a.5.5 0 0 1-.945.049L5.889 6.568l-1.473 2.21A.5.5 0 0 1 4 9z"/>
+  <path d="M.88 8C-2.427 1.68 4.41-2 7.823 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C11.59-2 18.426 1.68 15.12 8h-2.783l-1.874-4.686a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8z"/>
+  </svg>
+      <span class="brand-name">AfriHealth</span>
+    </div>
+    
+    
+    <nav class="nav-menu">
+      <a href="#" class="nav-item ">
+        <svg class="nav-icon" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        Accueil
+      </a>
+      <ng-container *ngIf="role === 'doctor'">
+      <a href="#" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        Patients
+      </a>
+       <a href="#" class="nav-item ai-assistant">
+        <svg class="nav-icon" viewBox="0 0 24 24"><path d="M20 12c0-1.1-.9-2-2-2h-3c-1.1 0-2 .9-2 2s.9 2 2 2h3c1.1 0 2-.9 2-2zM9 10c-1.1 0-2 .9-2 2s.9 2 2 2h3c1.1 0 2-.9 2-2s-.9-2-2-2H9zm11 8c0-1.1-.9-2-2-2h-3c-1.1 0-2 .9-2 2s.9 2 2 2h3c1.1 0 2-.9 2-2zM9 16c-1.1 0-2 .9-2 2s.9 2 2 2h3c1.1 0 2-.9 2-2s-.9-2-2-2H9zM20 6c0-1.1-.9-2-2-2h-3c-1.1 0-2 .9-2 2s.9 2 2 2h3c1.1 0 2-.9 2-2zM9 4c-1.1 0-2 .9-2 2s.9 2 2 2h3c1.1 0 2-.9 2-2s-.9-2-2-2H9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+        Assistant IA
+      </a>
+      </ng-container>
+
+      <ng-container *ngIf="role === 'patient'">
+        <a href="#" class="nav-item">Prendre RDV</a>
+        <a href="#" class="nav-item">Mes Ordonnances</a>
+        <a href="#" class="nav-item">Trouver un Docteur</a>
+      </ng-container>
+    </nav>
+    
+    <div class="sidebar-footer">
+      <a (click)="logout()" class="nav-item logout">
+        <svg class="nav-icon" viewBox="0 0 24 24"><path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+        Déconnexion 
+        
+      </a>
+    </div>
+  </aside>
+
+  <main class="content-area">
+    <header class="page-header">
+      <h1>Bienvenue, {{ username }}!</h1>
+      <span class="role-badge" [ngClass]="role === 'doctor' ? 'doctor-badge' : 'patient-badge'">
+        {{ role === 'doctor' ? 'Médecin' : 'Patient' }}
+      </span>
+    </header>
+
+    <div *ngIf="role === 'doctor'">
+  <section class="stats-grid">
+    <div class="stat-card doctor-border">
+      <div class="stat-value">{{ patientsCount }}</div>
+      <div class="stat-label">Patients suivis</div>
+    </div>
+    <div class="stat-card doctor-border">
+      <div class="stat-value">
+        {{ consultationsTodayCount }}
+      </div> <div class="stat-label">Consultations aujourd'hui</div>
+      <button (click)="ouvrirModalConsultation()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+  <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0"/>
+</svg></button>
+    </div>
+    
+<div class="modal-overlay" *ngIf="showModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <div class="header-title">
+        <span class="icon">📋</span>
+        <h2>Nouvelle Consultation</h2>
+      </div>
+      <button class="close-btn" (click)="fermerModal()">&times;</button>
+    </div>
+
+    <form (submit)="validerConsultation()" class="modal-form">
+      <div class="form-body">
+        
+        <div class="field-group">
+          <label for="patient">Patient concerné</label>
+          <div class="select-wrapper">
+            <select id="patient" [(ngModel)]="selectedPatientId" name="patient" required>
+              <option value="" disabled >Rechercher un patient...</option>
+              <option *ngFor="let p of patientsList" [value]="p.id">
+                {{ p.username }} — {{ p.email }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- <div class="field-group">
+          <label for="diag">Diagnostic & Observations</label>
+          <textarea id="diag" name="diagnostic" placeholder="Décrivez les symptômes et l'examen clinique..." rows="4"></textarea>
+        </div> -->
+        <div class="field-group">
+  <label for="diag">Diagnostic & Observations</label>
+  <textarea id="diag" 
+            [(ngModel)]="consultationData.diagnostic" 
+            name="diagnostic" 
+            placeholder="Décrivez les symptômes..." 
+            rows="4" required></textarea>
+</div>
+
+        <div class="field-group">
+          <label for="ord">Ordonnance / Traitement</label>
+          <textarea id="ord" 
+                    [(ngModel)]="consultationData.ordonnance" 
+                    name="ordonnance" 
+                    placeholder="Liste des médicaments et posologie..." 
+                    rows="3"></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" (click)="fermerModal()">Annuler</button>
+        <button type="submit" class="btn-save">Enregistrer la consultation</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+  </section>
+
+  <section class="patients-list-section card">
+    <div class="card-header">
+      <h2>Liste de mes Patients</h2>
+    </div>
+    <div class="card-body">
+      <table class="modern-table">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of patientsList">
+            <td>{{ p.username }}</td>
+            <td>{{ p.email }}</td>
+            <td>{{ p.phone_number || 'Non renseigné' }}</td>
+            <td>
+              <button class="btn-small" (click)="voirDossier(p.id)">Voir Dossier</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div *ngIf="patientsList.length === 0" class="empty-message">
+        Vous n'avez pas encore de patients enregistrés.
+      </div>
+    </div>
+  </section>
+
+  <section class="actions-panel card">
+    <div class="card-header"><h2>Actions Médicales</h2></div>
+    <div class="card-body action-buttons">
+      <button class="btn btn-doctor">Lancer l'Assistant IA</button>
+      <button class="btn btn-secondary">Historique des soins</button>
+    </div>
+  </section>
+</div>
+
+
+
+
+    <div *ngIf="role === 'patient'">
+      <section class="stats-grid">
+        <div class="stat-card patient-border">
+          <div class="stat-value">2</div>
+          <div class="stat-label">RDV à venir</div>
+        </div>
+        <div class="stat-card patient-border">
+          <div class="stat-value">0</div>
+          <div class="stat-label">Nouvelles ordonnances</div>
+        </div>
+      </section>
+
+      <section class="actions-panel card">
+        <div class="card-header"><h2>Ma Santé</h2></div>
+        <div class="card-body action-buttons">
+         <button class="btn btn-patient" (click)="ouvrirModalRDV()">Prendre un nouveau RDV</button>
+
+<div class="modal-overlay" *ngIf="showAppointmentModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h2>Prendre un Rendez-vous</h2>
+      <button (click)="showAppointmentModal = false">&times;</button>
+    </div>
+    
+    <div class="modal-body">
+      <div class="field-group">
+        <label>Choisir un Docteur</label>
+        <select [(ngModel)]="appointmentForm.doctor_id">
+          <option *ngFor="let doc of doctorsList" [value]="doc.id">
+            Dr. {{ doc.username }} ({{ doc.specialty }})
+          </option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label>Date et Heure</label>
+        <input type="datetime-local" [(ngModel)]="appointmentForm.date">
+      </div>
+
+      <div class="field-group">
+        <label>Motif</label>
+        <textarea [(ngModel)]="appointmentForm.reason" placeholder="Pourquoi consultez-vous ?"></textarea>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-save" (click)="validerRDV()">Confirmer la demande</button>
+    </div>
+  </div>
+</div>
+          <button class="btn btn-secondary">Contacter mon médecin</button>
+        </div>
+      </section>
+    </div>
+
+  </main>
+</div>

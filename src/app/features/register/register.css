@@ -1,0 +1,47 @@
+
+ .register-container {
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+button {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.role-selection button {
+  background-color: #ddd;
+}
+
+.role-selection .active {
+  background-color: #007B8A;
+  color: white;
+}
+
+.error {
+  color: red;
+}
+.footer-links { margin-top: 20px; font-size: 0.9em; }
+
+.footer {
+     background-color: #007B8A;
+    color: white;
+    text-align: center;
+    padding: 15px;
+        }
+a { color: #3498db; text-decoration: none; }
